@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Be My Valentine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card">
+        <h1>hi smelly noobie fayedagoat 😛😛</h1>
+        <div id="step1">
+            <p>I have something important to ask you 😳😳</p>
+            <button class="next-btn" onclick="goToStep2()">Tell me 👀</button>
+        </div>
+        <div id="step2" style="display: none;">
+            <p>Will you be my Valentine? 💘</p>
+
+            <div class="buttons">
+                <button class="yes-btn" onclick="showYayCard()">
+                    YES (ofcourse) 😍
+                </button>
+
+                <button class="no-btn" id="noBtn">
+                    aww hell naw ❌
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeYayCard()">
+        <div class="yay-card" onclick="event.stopPropagation()">
+            <h1>YAYYY 💖🎉</h1>
+            <p>You’re officially forever a noob 😍</p>
+
+            <div class="carousel">
+                <button class="arrow left" onclick="prevImage()">❮</button>
+                <img id="carouselImage" src="images/cute1.jpeg" alt="Valentine Memories">
+                <button class="arrow right" onclick="nextImage()">❯</button>
+            </div>
+
+            <p class="small-text">I love you MWAAHHH 💕</p>
+        </div>
+    </div>
+
+    <script>
+        function goToStep2() {
+            document.getElementById("step1").style.display = "none";
+            document.getElementById("step2").style.display = "block";
+        }
+
+        const noBtn = document.getElementById("noBtn");
+        let scale = 1;
+
+        noBtn.addEventListener("click", () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+            scale -= 0.1;
+            if (scale < 0.3) scale = 0.3;
+
+            noBtn.style.position = "fixed";
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+            noBtn.style.transform = `scale(${scale})`;
+        });
+
+        function showYayCard() {
+            document.getElementById("overlay").style.display = "flex";
+        }
+
+        function closeYayCard() {
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        const images = [
+            "images/cute1.jpeg",
+            "images/cute2.jpeg",
+            "images/cute3.jpeg",
+            "images/cute4.jpeg",
+            "images/cute5.jpeg",
+            "images/cute6.jpeg",
+            "images/cute7.jpeg",
+            "images/cute8.jpeg",
+        ];
+
+        let currentIndex = 0;
+
+        function updateImage() {
+            document.getElementById("carouselImage").src = images[currentIndex];
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateImage();
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateImage();
+        }
+    </script>
+
+</body>
+</html>
